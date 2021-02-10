@@ -1,0 +1,4 @@
+name: SendAll
+version: 1.0
+main: me.thisorthat.sa.server.SendAllServer
+author: Kobe McManus

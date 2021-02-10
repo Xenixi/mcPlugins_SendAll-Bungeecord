@@ -1,0 +1,3 @@
+#Server side config.yml for SendAll - please set port # to listen on
+port: 25595
+pass: hfg4iwi
