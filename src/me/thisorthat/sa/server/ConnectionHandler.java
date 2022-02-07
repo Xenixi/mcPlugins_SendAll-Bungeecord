@@ -23,7 +23,8 @@ public class ConnectionHandler extends Thread {
 			BufferedReader in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
 			System.out.println("[SendAll] Waiting for server name transmit");
 			String serverName = in.readLine();
-			clients.add(new MCServer(new PrintWriter(soc.getOutputStream(), true), serverName));
+			MCServer server = new MCServer(new PrintWriter(soc.getOutputStream(), true), serverName);
+			clients.add(server);
 			System.out.println("[SendAll] Recieved name from server '" + serverName + "'");
 			while (true) {
 				try {
@@ -59,7 +60,11 @@ public class ConnectionHandler extends Thread {
 					}
 				} catch (SocketException h) {
 					System.out.println("[SendAll] Client server '" + serverName + "' has disconnected");
-
+					for(int i = 0; i < clients.size(); i++) {
+						if(clients.get(i).getName().equalsIgnoreCase(serverName)) {
+							clients.remove(i);
+						}
+					}
 					break;
 				}
 			}
